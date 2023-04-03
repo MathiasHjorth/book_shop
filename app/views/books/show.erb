@@ -1,0 +1,26 @@
+
+<div>
+  <strong><%= @book.title %></strong>
+  <p><%= @book.description %></p>
+  <%= @book.release_date %>
+  <br>
+  <%= @book.rating  %>/5 *rating
+  <br>
+
+  <strong>Forfatter:</strong>
+  <br>
+  <%unless @book.author.nil? %>
+    <%= @book.author.full_name  %>
+  <%end %>
+  <br>
+
+
+</div>
+
+<p><%= link_to "Redigér", edit_book_path(@book) %></p>
+
+<p><%= link_to "Slet bog", book_path(@book), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%></p>
+
+<p><%= link_to "Tilbage til bøger", books_path %></p>
+
+<p><%= link_to "Tilbage til forside", root_path %></p>

@@ -1,0 +1,16 @@
+<div>
+  <strong><%= @category.name %></strong>
+
+  <strong>Bøger i denne kategori:</strong>
+  <br>
+  <%unless @category.books.nil? %>
+    <% @category.books.each do |book| %>
+      <%= book.title  %>
+    <%end %>
+  <%end %>
+  <br>
+
+
+</div>
+
+<p><%= link_to "Tilbage til forside", root_path %></p>

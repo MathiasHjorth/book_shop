@@ -1,0 +1,26 @@
+<%= form_with model: @author do |form| %>
+  <div>
+    <%= form.label :full_name %><br>
+    <%= form.text_field :full_name %>
+    <% @author.errors.full_messages_for(:full_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :date_of_birth %><br>
+    <%= form.date_select :date_of_birth %>
+    <% @author.errors.full_messages_for(:date_of_birth).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>
+
+<p><%= link_to "Tilbage til forfattere", authors_path %></p>
+
+<p><%= link_to "Tilbage til forside", root_path %></p>

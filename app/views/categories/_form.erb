@@ -1,0 +1,19 @@
+<%= form_with model: @category do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    <% @category.errors.full_messages_for(:full_name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+
+<% end %>
+
+<p><%= link_to "Tilbage til kategorier", categories_path %></p>
+
+<p><%= link_to "Tilbage til forside", root_path %></p>

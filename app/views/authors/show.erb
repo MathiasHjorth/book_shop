@@ -1,0 +1,21 @@
+<div>
+  <strong>Forfatter</strong>
+  <p><%= @author.full_name %></p>
+  <%= @author.date_of_birth %>
+
+  <br>
+  <strong>Bøger skrevet:</strong>
+
+  <ul>
+    <% @author.books.each do |book| %>
+      <li><%= link_to book.title, book %></li>
+    <% end %>
+
+  </ul>
+
+</div>
+
+
+<p><%= link_to "Tilbage til forfattere", authors_path %></p>
+
+<p><%= link_to "Tilbage til forside", root_path %></p>

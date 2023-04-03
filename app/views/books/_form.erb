@@ -1,0 +1,64 @@
+
+<!--bemærk form_with, finder selv ud af om den skal route til edit eller create, ved at kigge på om objektet eksisterer i databasen allerede-->
+
+<%= form_with model: book do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <% book.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %><br>
+    <% book.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :release_date %><br>
+    <%= form.date_field :release_date %><br>
+    <% book.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :rating %><br>
+    <%= form.select :rating, [1,2,3,4,5] %><br>
+    <% book.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <% if book.author_id.nil? %>
+    <div>
+      <%= form.label 'Authors' %><br>
+      <%= form.select :author_id, Author.all.collect {|author| [author.full_name, author.id]}%><br>
+      <% book.errors.full_messages_for(:body).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  <%end %>
+
+
+  <div>
+    <%= form.label :categories %><br>
+    <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %><br>
+    <% book.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+
+<% end %>
+
+<p><%= link_to "Tilbage til bøger", books_path %></p>
+
+<p><%= link_to "Tilbage til forside", root_path %></p>
