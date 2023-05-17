@@ -1,11 +1,12 @@
 <div>
-  <strong><%= @category.name %></strong>
-
+  <h2><%= @category.name %></h2>
+  <br>
   <strong>Bøger i denne kategori:</strong>
   <br>
   <%unless @category.books.nil? %>
     <% @category.books.each do |book| %>
-      <%= book.title  %>
+      <%= link_to book.title, "/books/#{book.id}"  %>
+      <br>
     <%end %>
   <%end %>
   <br>

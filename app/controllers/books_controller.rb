@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
-
   def index
-    @books = Book.all
+    @books = Book.all()
   end
 
 
@@ -17,7 +16,6 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.create(book_params)
-
     #<< metoden fortæller activeRecord at den skal oprette rows i jointable
     # Læg mærke til, vi peger where metoden på, Category id skal være lige med det vi finder i params, under :book key, dernæst :category_ids vi får fra view, returnér den værdi
     # og sammenlign.
@@ -50,13 +48,13 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book.destroy
 
-    redirect_to controller: "books", action: "index"
+    render 'pages/home'
   end
 
 
   private
   def book_params
-    params.require(:book).permit(:title,:description,:release_date,:rating,:author_id)
+    params.require(:book).permit(:title,:description,:release_date,:rating,:author_id,:category_ids => [])
   end
 
 end

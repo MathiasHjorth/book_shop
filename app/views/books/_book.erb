@@ -1,0 +1,18 @@
+
+<li>
+  <strong>Titel:</strong>
+  <%= book.title %>
+  <br>
+  Beskrivelse:
+  <%= book.description %>
+  <br>
+
+  <strong>Categories:</strong>
+  <% book.categories.each do |category| %>
+    <%= "#{category.name}" %>
+  <% end %>
+
+  <br>
+
+  <%= link_to 'Link',book %>
+</li>

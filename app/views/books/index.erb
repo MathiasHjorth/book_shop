@@ -1,15 +1,28 @@
 <h1>Bøger</h1>
-
-<%= link_to "New book", new_book_path %>
+<h3>Her finder du alle bøger i vores database</h3>
+<%= link_to "Ny bog", new_book_path %>
 
 
 <ul>
+  <!--benchmark tester performance forkellen mellem brug af fragment caching og uden caching-->
+  <%Benchmark.bm do |benchmark|%>
 
-  <% @books.each do |book| %>
-    <li>
-      <%= link_to book.title, book %>
-    </li>
-  <%end %>
+    <%= benchmark.report('----uncached books----') do %>
+      <% Book.all.each do |book| %>
+        <%= render book %>
+      <%end %>
+    <% end %>
+
+    <!--her bruges der fragment caching, af books. Dette sparer SELECT*from books, samt JOINs til hver books relaterede categories.-->
+    <%= benchmark.report('----cached books----') do %>
+      <% @books.each do |book| %>
+        <% cache book do%>
+          <%= render book %>
+        <% end %>
+      <%end %>
+    <% end %>
+
+  <% end %>
 
 </ul>
 

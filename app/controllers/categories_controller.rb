@@ -17,7 +17,11 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.create(category_params)
 
-    @category.save
+    if @category.save
+      redirect_to controller: "categories", action: "index"
+    else
+      render :new, status: :bad_request
+    end
   end
 
 
